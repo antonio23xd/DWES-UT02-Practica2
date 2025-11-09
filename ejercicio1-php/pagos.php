@@ -106,8 +106,9 @@ $socios = [
 </head>
 <body>
     <main>
-        <ul>
+        <ul>            
             <?php foreach($socios as $socio): ?>
+                <?php $totalPagado = 0; ?>
                 <li>
                     <strong>Nombree:</strong> <?= ($socio["nombre"]) ?><br/>
                     <strong>Apellidos:</strong> <?= ($socio["apellidos"]) ?><br/>
@@ -129,10 +130,15 @@ $socios = [
                                     <td style="color:green"><?= ($pago["estado_pago"]) ?></td>
                                 <?php else: ?>
                                     <td style="color:red;"><?= ($pago["estado_pago"]) ?></td>
+                                    <?php $totalPagado += $pago["importe_cuota"]; ?>
                                 <?php endif; ?>
                                 <td><?= ($pago["fecha_pago"]) ?></td>
                             </tr>
                         <?php endforeach; ?>
+                        <tr>
+                            <td>Importe total abonado</td>
+                            <td><?= $totalPagado ?></td>
+                        </tr>
                     </table>
                 </li>
                 <br/>
