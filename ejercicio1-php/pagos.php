@@ -96,13 +96,49 @@ $socios = [
         ]
     ]
 ];
-
-$lista_socios = "";
-foreach($socios as $socio){
-    $lista_socios .= "<li>".$socio."</li>";
-}
-
-//Cargar el html
-$template = file_get_contents("/template.html");
-$template = str_replace("{socios}","$lista_socios", $template);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <ul>
+            <?php foreach($socios as $socio): ?>
+                <li>
+                    <strong>Nombree:</strong> <?= ($socio["nombre"]) ?><br/>
+                    <strong>Apellidos:</strong> <?= ($socio["apellidos"]) ?><br/>
+                    <strong>DNI:</strong> <?= ($socio["DNI"]) ?><br/>
+                    <strong>E-mail:</strong> <?= ($socio["email"]) ?><br/>
+                    <strong>Teléfono:</strong> <?= ($socio["telefono"]) ?><br/>
+                    <table border="1">
+                        <tr>
+                            <th>Mes</th>
+                            <th>Importe Cuota</th>
+                            <th>Estado Pago</th>
+                            <th>Fecha Pago</th>
+                        </tr>
+                        <?php foreach($socio["pagos_mensuales"] as $pago): ?>
+                            <tr>
+                                <td><?= ($pago["mes"]) ?></td>
+                                <td><?= ($pago["importe_cuota"]) ?></td>
+                                <?php if ($pago["estado_pago"] === "Pagado"): ?>
+                                    <td style="color:green"><?= ($pago["estado_pago"]) ?></td>
+                                <?php else: ?>
+                                    <td style="color:red;"><?= ($pago["estado_pago"]) ?></td>
+                                <?php endif; ?>
+                                <td><?= ($pago["fecha_pago"]) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </li>
+                <br/>
+            <?php endforeach; ?>
+        </ul>          
+    </main>
+</body>
+</html>
 
