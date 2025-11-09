@@ -128,9 +128,9 @@ $socios = [
                                 <td><?= ($pago["importe_cuota"]) ?></td>
                                 <?php if ($pago["estado_pago"] === "Pagado"): ?>
                                     <td style="color:green"><?= ($pago["estado_pago"]) ?></td>
-                                <?php else: ?>
-                                    <td style="color:red;"><?= ($pago["estado_pago"]) ?></td>
                                     <?php $totalPagado += $pago["importe_cuota"]; ?>
+                                <?php else: ?>
+                                    <td style="color:red;"><?= ($pago["estado_pago"]) ?></td>                                    
                                 <?php endif; ?>
                                 <td><?= ($pago["fecha_pago"]) ?></td>
                             </tr>
